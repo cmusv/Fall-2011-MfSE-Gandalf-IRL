@@ -1,0 +1,30 @@
+<% content_for :left_nav do %>
+
+<% unless @page.course.blank? %>
+<div class="SecondaryNav">
+  <%= link_to @page.course.name, @page.course.pages[0], :class=>"SecondaryNav_Link" %>
+</div>
+
+<div class="SecondaryNav">
+  <% unless @current_semester_course.nil? %>
+  <%= link_to "Teams", course_teams_path(@current_semester_course), :class=>"SecondaryNav_Link" %>
+  <% else %>
+  <%= link_to "Teams (This works when the course is offered this semester)", "", :class=>"SecondaryNav_Link", :title => "This course is not offered in the current semester." %>
+  <% end %>
+</div>
+
+<% for page in @page.course.pages %>
+  <div class="SecondaryNav">
+  <%= link_to page.title, page, :class=>"SecondaryNav_Link" %>
+  </div>
+<% end %>
+
+<% if current_user.is_staff || current_user.is_admin %>
+            <div class="SecondaryNav">
+            <%= link_to "(Edit Order)", course_navigation_path(@page.course), :class=>"SecondaryNav_Link" %>
+            </div>
+<% end %>
+
+<% end %>
+
+<% end %>

@@ -1,0 +1,27 @@
+<% content_for :title, "Listing pages" %>
+
+<h1>Listing pages</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Course</th>
+  </tr>
+
+<% for page in @pages %>
+  <tr>
+    <td><%=h page.title %></td>
+<% if page.course_id.nil?  %>
+    <td>(<%=h page.course.name %>)</td>
+<% else %>
+    <td>&nbsp;</td>
+<% end %>
+    <td><%= link_to 'Show', pages_path %></td>
+    <td><%= link_to 'Edit', edit_page_path(page) %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New page', new_page_path %>

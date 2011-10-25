@@ -1,0 +1,24 @@
+<% if @page.course.blank? %>
+    <% content_for :title, @page.title %>
+<% else %>
+    <% content_for :title, @page.course.name + " - " + @page.title %>
+<% end %>
+
+<%= render :partial => "left_nav" %>
+
+
+<% if @page.course.blank? %>
+    <h1 name="page">  <%=h @page.title %></h1>
+<% else %>
+    <h1 name="course"><%=h @page.course.name %></h1>
+    <h2 name="page">  <%=h @page.title %></h2>
+<% end %>
+
+<% if params[:history] %>
+    <%= render :partial => "show_history" %>
+<% else %>
+    <%= render :partial => "show_page" %>
+<% end %>
+
+
+

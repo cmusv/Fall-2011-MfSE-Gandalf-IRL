@@ -1,0 +1,16 @@
+<h1> Learning Objective Setup </h1>
+
+<%= form_for @objectives, :url => {:action => "complete_setup_update"} do |f| %>
+
+<input type="hidden" name="id" value="<%=params[:id]%>">
+
+<% personcounter = 0 %>
+
+  <% @people.each do |person| %>
+    <%= person.human_name %>  <br />
+    <%= f.text_field :learning_objective, :value => PeerEvaluationLearningObjective.find(:first, :conditions => {:person_id => person.id, :team_id => params[:id]}).learning_objective, :index => personcounter %><br />
+    <% personcounter += 1 %>
+  <%end%>
+
+  <%= f.submit 'Create Learning Objectives' %>
+<%end%>
